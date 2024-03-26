@@ -8,5 +8,6 @@ include_directories(.)
 add_executable(gpt_cpp
         singleNN.cpp
         singleNN.h
-        neuron.h
-        neuron.cpp)
+        multi-class-NN/neuron.h
+        multi-class-NN/neuron.cpp
+        multi-class-NN/layer.h)
