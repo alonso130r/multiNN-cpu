@@ -15,7 +15,8 @@ private:
 
 public:
     Layer(int numberOfNeurons, int inputSize);
-    std::vector<double> forward(const std::vector<double> &inputs);
+    virtual std::vector<double> forward(const std::vector<double> &inputs);
+    virtual ~Layer();
 };
 
 

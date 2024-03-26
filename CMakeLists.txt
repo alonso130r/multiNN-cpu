@@ -11,4 +11,6 @@ add_executable(gpt_cpp
         multi-class-NN/neuron.h
         multi-class-NN/neuron.cpp
         multi-class-NN/layer.h
-        multi-class-NN/layer.cpp)
+        multi-class-NN/layer.cpp
+        multi-class-NN/hidden_layer.h
+        multi-class-NN/hidden_layer.cpp)
