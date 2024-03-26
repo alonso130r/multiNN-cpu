@@ -15,7 +15,7 @@ Neuron::Neuron(int inputSize, double biasValue) : bias(biasValue){
 }
 
 double Neuron::activation(double x) {
-    return std::tanh(x);
+    return std::max(0.0, x);
 }
 
 double Neuron::forward(const std::vector<double> &inputs) {

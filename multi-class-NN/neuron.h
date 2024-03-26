@@ -9,6 +9,7 @@
 #include <cmath>
 #include <numeric>
 #include <random>
+#include <algorithm>
 
 
 class Neuron {
