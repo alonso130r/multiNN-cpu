@@ -13,7 +13,7 @@ double sigmoid(double x) {
 
 // implement sigmoid derivative
 double sigmoid_derivative(double x) {
-    return 1.0 / (1.0 - x);
+    return (double) 1.0 / (1.0 - sigmoid(x));
 }
 
 // single layer NN constructor
@@ -103,9 +103,15 @@ void singleNN::backpropagate(const vector<double> &inputs, const vector<double> 
         }
     }
 
-    /*
-     FINISH UPDATING BIASES
-     */
+    // update biases for hidden layer
+    for (size_t i = 0; i < layer_sizes[1]; ++i) {
+        biases[i] += learn_rate * output_errors[i];
+    }
+
+    // update biases for output layer
+    for (size_t i = 0; i < layer_sizes[2]; ++i) {
+        biases[layer_sizes[1] + i] += learn_rate * output_errors[i];
+    }
 }
 
 // mean squared error loss

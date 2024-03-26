@@ -7,4 +7,6 @@ include_directories(.)
 
 add_executable(gpt_cpp
         singleNN.cpp
-        singleNN.h)
+        singleNN.h
+        neuron.h
+        neuron.cpp)
