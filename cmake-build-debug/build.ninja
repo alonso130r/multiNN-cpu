@@ -70,8 +70,15 @@ build CMakeFiles/gpt_cpp.dir/multi-class-NN/layer.cpp.o: CXX_COMPILER__gpt_cpp_u
   OBJECT_DIR = CMakeFiles/gpt_cpp.dir
   OBJECT_FILE_DIR = CMakeFiles/gpt_cpp.dir/multi-class-NN
 
-build CMakeFiles/gpt_cpp.dir/multi-class-NN/hidden_layer.cpp.o: CXX_COMPILER__gpt_cpp_unscanned_Debug /Users/vijaygoyal/Documents/GitHub/gpt-cpp/multi-class-NN/hidden_layer.cpp || cmake_object_order_depends_target_gpt_cpp
-  DEP_FILE = CMakeFiles/gpt_cpp.dir/multi-class-NN/hidden_layer.cpp.o.d
+build CMakeFiles/gpt_cpp.dir/multi-class-NN/layerWrappers.cpp.o: CXX_COMPILER__gpt_cpp_unscanned_Debug /Users/vijaygoyal/Documents/GitHub/gpt-cpp/multi-class-NN/layerWrappers.cpp || cmake_object_order_depends_target_gpt_cpp
+  DEP_FILE = CMakeFiles/gpt_cpp.dir/multi-class-NN/layerWrappers.cpp.o.d
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.3 -fcolor-diagnostics
+  INCLUDES = -I/Users/vijaygoyal/Documents/GitHub/gpt-cpp/.
+  OBJECT_DIR = CMakeFiles/gpt_cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/gpt_cpp.dir/multi-class-NN
+
+build CMakeFiles/gpt_cpp.dir/multi-class-NN/neuralNetwork.cpp.o: CXX_COMPILER__gpt_cpp_unscanned_Debug /Users/vijaygoyal/Documents/GitHub/gpt-cpp/multi-class-NN/neuralNetwork.cpp || cmake_object_order_depends_target_gpt_cpp
+  DEP_FILE = CMakeFiles/gpt_cpp.dir/multi-class-NN/neuralNetwork.cpp.o.d
   FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.3 -fcolor-diagnostics
   INCLUDES = -I/Users/vijaygoyal/Documents/GitHub/gpt-cpp/.
   OBJECT_DIR = CMakeFiles/gpt_cpp.dir
@@ -85,7 +92,7 @@ build CMakeFiles/gpt_cpp.dir/multi-class-NN/hidden_layer.cpp.o: CXX_COMPILER__gp
 #############################################
 # Link the executable gpt_cpp
 
-build gpt_cpp: CXX_EXECUTABLE_LINKER__gpt_cpp_Debug CMakeFiles/gpt_cpp.dir/singleNN.cpp.o CMakeFiles/gpt_cpp.dir/multi-class-NN/neuron.cpp.o CMakeFiles/gpt_cpp.dir/multi-class-NN/layer.cpp.o CMakeFiles/gpt_cpp.dir/multi-class-NN/hidden_layer.cpp.o
+build gpt_cpp: CXX_EXECUTABLE_LINKER__gpt_cpp_Debug CMakeFiles/gpt_cpp.dir/singleNN.cpp.o CMakeFiles/gpt_cpp.dir/multi-class-NN/neuron.cpp.o CMakeFiles/gpt_cpp.dir/multi-class-NN/layer.cpp.o CMakeFiles/gpt_cpp.dir/multi-class-NN/layerWrappers.cpp.o CMakeFiles/gpt_cpp.dir/multi-class-NN/neuralNetwork.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.3
   OBJECT_DIR = CMakeFiles/gpt_cpp.dir
   POST_BUILD = :
