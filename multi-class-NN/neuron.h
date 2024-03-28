@@ -19,7 +19,7 @@ private:
     double lastInput, lastOutput;
 
 public:
-    Neuron(int inputSize, double biasValue);
+    explicit Neuron(int inputSize, double biasValue=1.0);
 
     double activation(double x);
     double forward(const std::vector<double> &inputs);

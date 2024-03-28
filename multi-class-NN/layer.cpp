@@ -19,3 +19,26 @@ std::vector<double> Layer::forward(const std::vector<double> &inputs) {
     }
     return outputs;
 }
+
+void Layer::updateWeights(const std::vector<double> &deltas, double LR) {
+    assert(deltas.size() == neurons.size()); // sanity check 😭
+    for (size_t i = 0; i < neurons.size(); ++i) {
+        neurons[i].updateWeights(LR, deltas[i]);
+    }
+}
+
+std::vector<double>
+Layer::backpropagate(const std::vector<double> &nextDeltas, const std::vector<std::vector<double>> &nextWeights) {
+    std::vector<double> deltas(neurons.size());
+
+    for (size_t i = 0; i < neurons.size(); ++i) {
+        double delta = 0.0;
+        for (size_t j = 0; j < nextDeltas.size(); ++j) {
+            delta += nextDeltas[j] * nextWeights[j][i];
+        }
+        delta *= Neuron::derivativeA(neurons[i].getWeightedSum());
+        deltas[i] = delta;
+    }
+
+    return deltas;
+}
