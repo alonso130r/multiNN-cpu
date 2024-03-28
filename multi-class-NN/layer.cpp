@@ -42,3 +42,35 @@ Layer::backpropagate(const std::vector<double> &nextDeltas, const std::vector<st
 
     return deltas;
 }
+
+std::vector<double> Layer::computeOutputDeltas(const std::vector<double> &expectedOutputs) {
+    std::vector<double> outputDeltas(neurons.size());
+
+    for (size_t i = 0; i < neurons.size(); ++i) {
+        double output = neurons[i].getOutput();
+        double derivative = neurons[i].derivativeA(output);
+        double error = output - expectedOutputs[i];
+        outputDeltas[i] = error * derivative;
+    }
+    return outputDeltas;
+}
+
+std::vector<std::vector<double>> Layer::getWeights() const {
+    std::vector<std::vector<double>> layerWeights;
+    for (const auto& neuron : neurons) {
+        layerWeights.push_back(neuron.getWeights());
+    }
+    return layerWeights;
+}
+
+std::vector<double> Layer::getBiases() const {
+    std::vector<double> layerBiases;
+    for (const auto& neuron : neurons) {
+        layerBiases.push_back(neuron.getBias());
+    }
+    return layerBiases;
+}
+
+std::vector<Neuron> Layer::getNeurons() const {
+    return neurons;
+}

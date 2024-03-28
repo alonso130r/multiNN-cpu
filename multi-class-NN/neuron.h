@@ -24,6 +24,11 @@ public:
     double activation(double x);
     double forward(const std::vector<double> &inputs);
 
+    const std::vector<double>& getWeights() const;
+    double getBias() const;
+    void setWeights(const std::vector<double>& newWeights);
+    void setBias(double newBias);
+
     // backprop-specific methods
     void updateWeights(double LR, double delta);
     static double derivativeA(double x);

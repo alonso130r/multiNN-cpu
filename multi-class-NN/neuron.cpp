@@ -4,7 +4,7 @@
 
 #include "neuron.h"
 
-Neuron::Neuron(int inputSize, double biasValue=1.0) : bias(biasValue), lastInput(0.0), lastOutput(0.0) {
+Neuron::Neuron(int inputSize, double biasValue) : bias(biasValue), lastInput(0.0), lastOutput(0.0) {
     // initialize weights at random
     std::default_random_engine gen;
     std::normal_distribution<double> distribution(0.0, 1.0);
@@ -43,6 +43,22 @@ double Neuron::derivativeA(double x) {
     } else {
         return 1.0;
     }
+}
+
+const std::vector<double> &Neuron::getWeights() const {
+    return weights;
+}
+
+double Neuron::getBias() const {
+    return bias;
+}
+
+void Neuron::setBias(double newBias) {
+    bias = newBias;
+}
+
+void Neuron::setWeights(const std::vector<double> &newWeights) {
+    weights = newWeights;
 }
 
 double Neuron::getWeightedSum() const {return lastInput;}

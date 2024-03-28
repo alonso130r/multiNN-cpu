@@ -7,14 +7,17 @@
 
 #include "layerWrappers.h"
 #include <memory>
+#include <iostream>
+#include <fstream>
 
 
 class NeuralNetwork {
 private:
     std::vector<std::unique_ptr<Layer>> layers;
+    double lr;
 
 public:
-    NeuralNetwork() = default;
+    NeuralNetwork(double LR);
 
     // add hidden layer
     void addHiddenLayer(int numberOfNeurons, int inputSize);
@@ -27,6 +30,14 @@ public:
 
     // forward prop
     std::vector<double> forward(const std::vector<double> &inputs);
+
+    // backprop/train methods
+    void backpropagate(const std::vector<double> &expected);
+    void train(const std::vector<std::vector<double>>& dataset, const std::vector<std::vector<double>>& labels, int epochs);
+
+    // save/load weights, binary file
+    void save(const std::string &filename);
+    void load(const std::string &filename);
 };
 
 
