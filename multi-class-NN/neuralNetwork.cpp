@@ -44,7 +44,7 @@ void NeuralNetwork::backpropagate(const std::vector<double> &expected) {
 
 void
 NeuralNetwork::train(const std::vector<std::vector<double>> &dataset, const std::vector<std::vector<double>> &labels,
-                     int epochs) {
+                     int epochs, const std::string &filename) {
     for (int epoch = 0; epoch < epochs; ++epoch) {
         double loss = 0.0;
         for (size_t i = 0; i < dataset.size(); ++i) {
@@ -59,6 +59,7 @@ NeuralNetwork::train(const std::vector<std::vector<double>> &dataset, const std:
         loss /= (double)dataset.size();
         printf("Epoch %d / %d, Loss: %0.5f\n", epoch + 1, epochs, loss);
     }
+    save(filename);
 }
 
 // save/load params from binary file

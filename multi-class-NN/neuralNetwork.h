@@ -33,7 +33,7 @@ public:
 
     // backprop/train methods
     void backpropagate(const std::vector<double> &expected);
-    void train(const std::vector<std::vector<double>>& dataset, const std::vector<std::vector<double>>& labels, int epochs);
+    void train(const std::vector<std::vector<double>>& dataset, const std::vector<std::vector<double>>& labels, int epochs, const std::string &filename);
 
     // save/load weights, binary file
     void save(const std::string &filename);
