@@ -16,11 +16,19 @@ class Neuron {
 private:
     std::vector<double> weights;
     double bias;
+    double lastInput, lastOutput;
 
 public:
-    Neuron(int inputSize, double biasValue=1.0);
+    Neuron(int inputSize, double biasValue);
+
     double activation(double x);
     double forward(const std::vector<double> &inputs);
+
+    // backprop-specific methods
+    void updateWeights(double LR, double delta);
+    static double derivativeA(double x);
+    double getWeightedSum() const;
+    double getOutput() const;
 };
 
 
