@@ -15,4 +15,6 @@ add_executable(gpt_cpp
         multi-class-NN/layerWrappers.h
         multi-class-NN/layerWrappers.cpp
         multi-class-NN/neuralNetwork.h
-        multi-class-NN/neuralNetwork.cpp)
+        multi-class-NN/neuralNetwork.cpp
+        multi-class-NN/trainTest1.cpp
+        multi-class-NN/trainTest1.cpp)
