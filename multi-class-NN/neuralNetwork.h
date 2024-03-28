@@ -17,7 +17,7 @@ private:
     double lr;
 
 public:
-    NeuralNetwork(double LR);
+    explicit NeuralNetwork(double LR);
 
     // add hidden layer
     void addHiddenLayer(int numberOfNeurons, int inputSize);
