@@ -129,6 +129,43 @@ gpt_cpp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpt_cpp.dir/build.make CMakeFiles/gpt_cpp.dir/build
 .PHONY : gpt_cpp/fast
 
+#=============================================================================
+# Target rules for targets named trainTest1
+
+# Build rule for target.
+trainTest1: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 trainTest1
+.PHONY : trainTest1
+
+# fast build rule for target.
+trainTest1/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trainTest1.dir/build.make CMakeFiles/trainTest1.dir/build
+.PHONY : trainTest1/fast
+
+multi-class-NN/dataset1/testFile.o: multi-class-NN/dataset1/testFile.cpp.o
+.PHONY : multi-class-NN/dataset1/testFile.o
+
+# target to build an object file
+multi-class-NN/dataset1/testFile.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpt_cpp.dir/build.make CMakeFiles/gpt_cpp.dir/multi-class-NN/dataset1/testFile.cpp.o
+.PHONY : multi-class-NN/dataset1/testFile.cpp.o
+
+multi-class-NN/dataset1/testFile.i: multi-class-NN/dataset1/testFile.cpp.i
+.PHONY : multi-class-NN/dataset1/testFile.i
+
+# target to preprocess a source file
+multi-class-NN/dataset1/testFile.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpt_cpp.dir/build.make CMakeFiles/gpt_cpp.dir/multi-class-NN/dataset1/testFile.cpp.i
+.PHONY : multi-class-NN/dataset1/testFile.cpp.i
+
+multi-class-NN/dataset1/testFile.s: multi-class-NN/dataset1/testFile.cpp.s
+.PHONY : multi-class-NN/dataset1/testFile.s
+
+# target to generate assembly for a file
+multi-class-NN/dataset1/testFile.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpt_cpp.dir/build.make CMakeFiles/gpt_cpp.dir/multi-class-NN/dataset1/testFile.cpp.s
+.PHONY : multi-class-NN/dataset1/testFile.cpp.s
+
 multi-class-NN/layer.o: multi-class-NN/layer.cpp.o
 .PHONY : multi-class-NN/layer.o
 
@@ -231,6 +268,7 @@ multi-class-NN/trainTest1.o: multi-class-NN/trainTest1.cpp.o
 # target to build an object file
 multi-class-NN/trainTest1.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpt_cpp.dir/build.make CMakeFiles/gpt_cpp.dir/multi-class-NN/trainTest1.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trainTest1.dir/build.make CMakeFiles/trainTest1.dir/multi-class-NN/trainTest1.cpp.o
 .PHONY : multi-class-NN/trainTest1.cpp.o
 
 multi-class-NN/trainTest1.i: multi-class-NN/trainTest1.cpp.i
@@ -239,6 +277,7 @@ multi-class-NN/trainTest1.i: multi-class-NN/trainTest1.cpp.i
 # target to preprocess a source file
 multi-class-NN/trainTest1.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpt_cpp.dir/build.make CMakeFiles/gpt_cpp.dir/multi-class-NN/trainTest1.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trainTest1.dir/build.make CMakeFiles/trainTest1.dir/multi-class-NN/trainTest1.cpp.i
 .PHONY : multi-class-NN/trainTest1.cpp.i
 
 multi-class-NN/trainTest1.s: multi-class-NN/trainTest1.cpp.s
@@ -247,6 +286,7 @@ multi-class-NN/trainTest1.s: multi-class-NN/trainTest1.cpp.s
 # target to generate assembly for a file
 multi-class-NN/trainTest1.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpt_cpp.dir/build.make CMakeFiles/gpt_cpp.dir/multi-class-NN/trainTest1.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trainTest1.dir/build.make CMakeFiles/trainTest1.dir/multi-class-NN/trainTest1.cpp.s
 .PHONY : multi-class-NN/trainTest1.cpp.s
 
 singleNN.o: singleNN.cpp.o
@@ -282,6 +322,10 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... gpt_cpp"
+	@echo "... trainTest1"
+	@echo "... multi-class-NN/dataset1/testFile.o"
+	@echo "... multi-class-NN/dataset1/testFile.i"
+	@echo "... multi-class-NN/dataset1/testFile.s"
 	@echo "... multi-class-NN/layer.o"
 	@echo "... multi-class-NN/layer.i"
 	@echo "... multi-class-NN/layer.s"

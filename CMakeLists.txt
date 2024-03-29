@@ -17,4 +17,7 @@ add_executable(gpt_cpp
         multi-class-NN/neuralNetwork.h
         multi-class-NN/neuralNetwork.cpp
         multi-class-NN/trainTest1.cpp
-        multi-class-NN/trainTest1.cpp)
+        multi-class-NN/trainTest1.cpp
+        multi-class-NN/dataset1/testFile.cpp)
+
+add_executable(trainTest1 multi-class-NN/trainTest1.cpp)

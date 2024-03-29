@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/gpt_cpp.dir/multi-class-NN/dataset1/testFile.cpp.o"
+  "CMakeFiles/gpt_cpp.dir/multi-class-NN/dataset1/testFile.cpp.o.d"
   "CMakeFiles/gpt_cpp.dir/multi-class-NN/layer.cpp.o"
   "CMakeFiles/gpt_cpp.dir/multi-class-NN/layer.cpp.o.d"
   "CMakeFiles/gpt_cpp.dir/multi-class-NN/layerWrappers.cpp.o"

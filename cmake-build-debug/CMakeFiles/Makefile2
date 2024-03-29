@@ -64,6 +64,7 @@ CMAKE_BINARY_DIR = /Users/vijaygoyal/Documents/GitHub/gpt-cpp/cmake-build-debug
 
 # The main recursive "all" target.
 all: CMakeFiles/gpt_cpp.dir/all
+all: CMakeFiles/trainTest1.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -72,6 +73,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/gpt_cpp.dir/clean
+clean: CMakeFiles/trainTest1.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -81,12 +83,12 @@ clean: CMakeFiles/gpt_cpp.dir/clean
 CMakeFiles/gpt_cpp.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpt_cpp.dir/build.make CMakeFiles/gpt_cpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpt_cpp.dir/build.make CMakeFiles/gpt_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vijaygoyal/Documents/GitHub/gpt-cpp/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target gpt_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vijaygoyal/Documents/GitHub/gpt-cpp/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target gpt_cpp"
 .PHONY : CMakeFiles/gpt_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/gpt_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vijaygoyal/Documents/GitHub/gpt-cpp/cmake-build-debug/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vijaygoyal/Documents/GitHub/gpt-cpp/cmake-build-debug/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/gpt_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vijaygoyal/Documents/GitHub/gpt-cpp/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/gpt_cpp.dir/rule
@@ -99,6 +101,32 @@ gpt_cpp: CMakeFiles/gpt_cpp.dir/rule
 CMakeFiles/gpt_cpp.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpt_cpp.dir/build.make CMakeFiles/gpt_cpp.dir/clean
 .PHONY : CMakeFiles/gpt_cpp.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/trainTest1.dir
+
+# All Build rule for target.
+CMakeFiles/trainTest1.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trainTest1.dir/build.make CMakeFiles/trainTest1.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trainTest1.dir/build.make CMakeFiles/trainTest1.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vijaygoyal/Documents/GitHub/gpt-cpp/cmake-build-debug/CMakeFiles --progress-num=9,10 "Built target trainTest1"
+.PHONY : CMakeFiles/trainTest1.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/trainTest1.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vijaygoyal/Documents/GitHub/gpt-cpp/cmake-build-debug/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/trainTest1.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vijaygoyal/Documents/GitHub/gpt-cpp/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/trainTest1.dir/rule
+
+# Convenience name for target.
+trainTest1: CMakeFiles/trainTest1.dir/rule
+.PHONY : trainTest1
+
+# clean rule for target.
+CMakeFiles/trainTest1.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trainTest1.dir/build.make CMakeFiles/trainTest1.dir/clean
+.PHONY : CMakeFiles/trainTest1.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
