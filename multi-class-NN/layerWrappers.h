@@ -30,7 +30,7 @@ private:
     static std::vector<double> calculateSTDDev(const std::vector<std::vector<double>> &inputs, const std::vector<double> &means);
     static std::vector<std::vector<double>> applyNormalization(const std::vector<std::vector<double>> &inputs,
                                                         const std::vector<double> &means,
-                                                        const std::vector<double> stdDevs);
+                                                        const std::vector<double> &stdDevs);
 
 public:
     using Layer::Layer;

@@ -15,12 +15,14 @@ class NeuralNetwork {
 private:
     std::vector<std::unique_ptr<Layer>> layers;
     double lr;
+    int lastSize = 0;
 
 public:
     explicit NeuralNetwork(double LR);
 
     // add hidden layer
     void addHiddenLayer(int numberOfNeurons, int inputSize);
+    void addHiddenLayer(int numberOfNeurons);
 
     // add input layer
     void addInputLayer(int numberOfNeurons, int inputSize);

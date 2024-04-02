@@ -6,7 +6,7 @@
 
 // complete constructor
 Layer::Layer(int numberOfNeurons, int inputSize) {
-    for (int i = 0; i < inputSize; ++i) {
+    for (int i = 0; i < numberOfNeurons; ++i) {
         neurons.emplace_back(inputSize);
     }
 }
@@ -14,7 +14,8 @@ Layer::Layer(int numberOfNeurons, int inputSize) {
 // complete forward pass
 std::vector<double> Layer::forward(const std::vector<double> &inputs) {
     std::vector<double> outputs;
-    for (auto &neuron: neurons) {
+    outputs.reserve(neurons.size());
+for (auto &neuron: neurons) {
         outputs.push_back(neuron.forward(inputs));
     }
     return outputs;

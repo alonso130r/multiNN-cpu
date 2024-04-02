@@ -32,6 +32,10 @@ void loadCSV(const std::string &filename, std::vector<std::vector<double>> &feat
                 // Skip line if conversion fails due to non-numeric value
                 invalidData = true;
                 break;
+            } catch (const std::out_of_range& e) {
+                // Skip line if number passed is out of range for a double
+                invalidData = true;
+                break;
             }
         }
 
@@ -39,9 +43,8 @@ void loadCSV(const std::string &filename, std::vector<std::vector<double>> &feat
             int label = static_cast<int>(featureVector.back());
             featureVector.pop_back();
 
-            // Convert label to 2D vector format
-            std::vector<double> labelVector(2, 0.0);
-            labelVector[label] = 1.0;
+            // Directly use the label in a vector
+            std::vector<double> labelVector = {static_cast<double>(label)};
 
             features.push_back(featureVector);
             labels.push_back(labelVector);
@@ -57,15 +60,19 @@ int main() {
 
     loadCSV(f1, features, labels);
 
+    std::cout << features.size() << "\n";
+    std::cout << labels.size() << "\n";
+    std::cout << labels[1].size() << std::endl;
+
     NeuralNetwork nn1(1e-3);
-    nn1.addInputLayer(1000, 1000);
-    nn1.addHiddenLayer(500, 1000);
-    nn1.addHiddenLayer(250, 500);
-    nn1.addHiddenLayer(100, 250);
-    nn1.addOutputLayer(1, 100);
+    nn1.addInputLayer((int)features[1].size(), (int)features[1].size());
+    nn1.addHiddenLayer(512, 1000); // 1000
+    nn1.addHiddenLayer(256, 512);
+    nn1.addHiddenLayer(128, 256);
+    nn1.addOutputLayer(1, 128);
 
     InputLayer::normalize(features);
 
-    std::string file = "params1.bin";
-    nn1.train(features, labels, 40, file);
+    std::string file = "/Users/vijaygoyal/Documents/GitHub/gpt-cpp/multi-class-NN/params1.bin";
+    nn1.train(features, labels, 5, file);
 }

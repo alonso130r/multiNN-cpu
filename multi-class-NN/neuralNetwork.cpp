@@ -7,11 +7,18 @@
 NeuralNetwork::NeuralNetwork(double LR) : lr(LR) {}
 
 void NeuralNetwork::addHiddenLayer(int numberOfNeurons, int inputSize) {
-    layers.push_back(std::make_unique<HiddenLayer>(numberOfNeurons, inputSize));
+    lastSize = inputSize;
+    layers.push_back(std::make_unique<HiddenLayer>(numberOfNeurons, lastSize));
 }
 
-void NeuralNetwork::addInputLayer(int numberOfNeurons, int inputSize) {
+void NeuralNetwork::addHiddenLayer(int numberOfNeurons) {
+    layers.push_back(std::make_unique<HiddenLayer>(numberOfNeurons, lastSize));
+    lastSize /= 2;
+}
+
+void NeuralNetwork::addInputLayer(int inputSize, int numberOfNeurons) {
     layers.insert(layers.begin(), std::make_unique<InputLayer>(numberOfNeurons, inputSize));
+    lastSize = inputSize;
 }
 
 void NeuralNetwork::addOutputLayer(int numberOfNeurons, int inputSize) {
@@ -21,7 +28,7 @@ void NeuralNetwork::addOutputLayer(int numberOfNeurons, int inputSize) {
 std::vector<double> NeuralNetwork::forward(const std::vector<double> &inputs) {
     std::vector<double> outputs = inputs;
     for (auto &layer : layers) {
-        outputs = layer ->forward(outputs);
+        outputs = layer -> forward(outputs);
     }
     return outputs;
 }
@@ -45,6 +52,7 @@ void NeuralNetwork::backpropagate(const std::vector<double> &expected) {
 void
 NeuralNetwork::train(const std::vector<std::vector<double>> &dataset, const std::vector<std::vector<double>> &labels,
                      int epochs, const std::string &filename) {
+    std::cout << "Training..." << std::endl;
     for (int epoch = 0; epoch < epochs; ++epoch) {
         double loss = 0.0;
         for (size_t i = 0; i < dataset.size(); ++i) {

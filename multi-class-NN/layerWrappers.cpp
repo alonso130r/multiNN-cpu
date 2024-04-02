@@ -32,7 +32,7 @@ std::vector<double> InputLayer::calculateSTDDev(const std::vector<std::vector<do
 
 std::vector<std::vector<double>> InputLayer::applyNormalization(const std::vector<std::vector<double>> &inputs,
                                                                 const std::vector<double> &means,
-                                                                const std::vector<double> stdDevs) {
+                                                                const std::vector<double> &stdDevs) {
     std::vector<std::vector<double>> normalizedInputs = inputs;
     for (auto &input : normalizedInputs) {
         for (size_t i = 0; i < input.size(); ++i) {

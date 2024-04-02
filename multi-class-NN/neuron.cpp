@@ -2,6 +2,7 @@
 // Created by Vijay Goyal on 2024-03-26.
 //
 
+#include <iostream>
 #include "neuron.h"
 
 Neuron::Neuron(int inputSize, double biasValue) : bias(biasValue), lastInput(0.0), lastOutput(0.0) {
@@ -12,6 +13,8 @@ Neuron::Neuron(int inputSize, double biasValue) : bias(biasValue), lastInput(0.0
     for (int i = 0; i < inputSize; ++i) {
         weights.push_back(distribution(gen));
     }
+
+    std::cout << "Neuron created with " << weights.size() << " weights." << std::endl;
 }
 
 double Neuron::activation(double x) {
@@ -21,6 +24,7 @@ double Neuron::activation(double x) {
 double Neuron::forward(const std::vector<double> &inputs) {
     // ensure input size matches weight size
     if (inputs.size() != weights.size()) {
+        std::cout << "Mismatch: " << inputs.size() << " inputs and " << weights.size() << " weights." << std::endl;
         throw std::runtime_error("Input and weight size do not match.");
     }
 

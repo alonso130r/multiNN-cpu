@@ -10,11 +10,11 @@ validation_df = pd.read_csv('validation.csv')
 
 # split into x, y
 X_train = train_df['sentence']
-y_train = train_df['idx']
+y_train = train_df['label']
 X_test = test_df['sentence']
-y_test = test_df['idx']
+y_test = test_df['label']
 X_validation = validation_df['sentence']
-y_validation = validation_df['idx']
+y_validation = validation_df['label']
 
 # initialize vectorizer
 vectorizer = TfidfVectorizer(max_features=1000)
