@@ -14,8 +14,10 @@
 
 class Neuron {
 private:
-    std::vector<double> weights;
-    double bias;
+    std::vector<double> weights, m_weights, v_weights;
+    std::vector<double> gradWeights;
+    double bias, m_bias, v_bias;
+    double gradBias;
     double lastInput, lastOutput;
 
 public:
@@ -25,15 +27,27 @@ public:
     double forward(const std::vector<double> &inputs);
 
     const std::vector<double>& getWeights() const;
-    double getBias() const;
     void setWeights(const std::vector<double>& newWeights);
+    std::vector<double> getMWeights() const;
+    void setMWeights(const std::vector<double>& newMWeights);
+    std::vector<double> getVWeights() const;
+    void setVWeights(const std::vector<double>& newVWeights);
+    double getBias() const;
     void setBias(double newBias);
+    double getMBias() const;
+    void setMBias(double newMBias);
+    double getVBias() const;
+    void setVBias(double newVBias);
 
     // backprop-specific methods
     void updateWeights(double LR, double delta);
     static double derivativeA(double x);
     double getWeightedSum() const;
     double getOutput() const;
+
+    // for Adam optimizer (work in progress)
+    void updateAdamW(double lr, double beta1, double beta2, double epsilon, double weightDecay, int t);
+    void setGradient(const std::vector<double>& gradients, double gradientBias);
 };
 
 
