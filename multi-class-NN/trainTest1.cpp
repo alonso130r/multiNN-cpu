@@ -12,6 +12,7 @@
 
 
 void loadCSV(const std::string &filename, std::vector<std::vector<double>> &features, std::vector<std::vector<double>> &labels) {
+    std::cout << "Loading data from " << filename << "..." <<std::endl;
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
@@ -64,7 +65,7 @@ int main() {
     std::cout << labels.size() << "\n";
     std::cout << labels[1].size() << std::endl;
 
-    NeuralNetwork nn1(1e-3);
+    NeuralNetwork nn1(1e-2);
     nn1.addInputLayer((int)features[1].size(), (int)features[1].size());
     nn1.addHiddenLayer(512, 1000); // 1000
     nn1.addHiddenLayer(256, 512);
@@ -74,5 +75,5 @@ int main() {
     InputLayer::normalize(features);
 
     std::string file = "/Users/vijaygoyal/Documents/GitHub/gpt-cpp/multi-class-NN/params1.bin";
-    nn1.train(features, labels, 5, file);
+    nn1.train(features, labels, 1, file);
 }

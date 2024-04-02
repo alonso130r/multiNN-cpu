@@ -52,7 +52,7 @@ void NeuralNetwork::backpropagate(const std::vector<double> &expected) {
 void
 NeuralNetwork::train(const std::vector<std::vector<double>> &dataset, const std::vector<std::vector<double>> &labels,
                      int epochs, const std::string &filename) {
-    std::cout << "Training..." << std::endl;
+    std::cout << "Training begun..." << std::endl;
     for (int epoch = 0; epoch < epochs; ++epoch) {
         double loss = 0.0;
         for (size_t i = 0; i < dataset.size(); ++i) {
@@ -62,6 +62,9 @@ NeuralNetwork::train(const std::vector<std::vector<double>> &dataset, const std:
             // calculate loss using MSE
             for (size_t j = 0; j < labels[i].size(); ++j) {
                 loss += std::pow(outputs[j] - labels[i][j], 2);
+            }
+            if (i % 100 == 0) {
+                std::cout << "Training example " << i << ", loss of: " <<  loss / (double)i << std::endl;
             }
         }
         loss /= (double)dataset.size();
