@@ -4,7 +4,8 @@
 
 #include "neuralNetwork.h"
 
-NeuralNetwork::NeuralNetwork(double LR) : lr(LR) {}
+NeuralNetwork::NeuralNetwork(double LR, double b1, double b2,
+                             double e, double wD) : lr(LR), beta1(b1), beta2(b2), epsilon(e), weightDecay(wD) {}
 
 void NeuralNetwork::addHiddenLayer(int numberOfNeurons, int inputSize) {
     lastSize = inputSize;
@@ -45,7 +46,7 @@ void NeuralNetwork::backpropagate(const std::vector<double> &expected) {
             // hidden layers
             deltas = layers[i] ->backpropagate(deltas, layers[i+1] ->getWeights());
         }
-        layers[i] ->updateWeights(deltas, lr);
+        //layers[i] ->updateWeights(deltas, lr);
     }
 }
 
@@ -63,6 +64,14 @@ NeuralNetwork::train(const std::vector<std::vector<double>> &dataset, const std:
             for (size_t j = 0; j < labels[i].size(); ++j) {
                 loss += std::pow(outputs[j] - labels[i][j], 2);
             }
+
+            // update weights w/ AdamW
+            for (auto &layer : layers) {
+                for (auto &neuron : layer->getNeurons()) {
+                    neuron.updateAdamW(lr, beta1, beta2, epsilon, weightDecay, i);
+                }
+            }
+
             if (i % 100 == 0) {
                 std::cout << "Training example " << i << ", loss of: " <<  loss / (double)i << std::endl;
             }

@@ -13,9 +13,10 @@ Layer::Layer(int numberOfNeurons, int inputSize) {
 
 // complete forward pass
 std::vector<double> Layer::forward(const std::vector<double> &inputs) {
+    inputs_ = inputs;
     std::vector<double> outputs;
     outputs.reserve(neurons.size());
-for (auto &neuron: neurons) {
+    for (auto &neuron: neurons) {
         outputs.push_back(neuron.forward(inputs));
     }
     return outputs;
@@ -31,6 +32,7 @@ void Layer::updateWeights(const std::vector<double> &deltas, double LR) {
 std::vector<double>
 Layer::backpropagate(const std::vector<double> &nextDeltas, const std::vector<std::vector<double>> &nextWeights) {
     std::vector<double> deltas(neurons.size());
+    // use inputs_
 
     for (size_t i = 0; i < neurons.size(); ++i) {
         double delta = 0.0;
@@ -39,6 +41,15 @@ Layer::backpropagate(const std::vector<double> &nextDeltas, const std::vector<st
         }
         delta *= Neuron::derivativeA(neurons[i].getWeightedSum());
         deltas[i] = delta;
+
+        // calculate gradients
+        std::vector<double> weightGradients;
+        weightGradients.reserve(inputs_.size());
+        for (const auto& input : inputs_) {
+            weightGradients.push_back(delta * input);
+        }
+        double biasGradient = delta;
+        neurons[i].setGradient(weightGradients, biasGradient);
     }
 
     return deltas;

@@ -12,6 +12,7 @@
 class Layer {
 private:
     std::vector<Neuron> neurons;
+    std::vector<double> inputs_;
 
 public:
     Layer(int numberOfNeurons, int inputSize);

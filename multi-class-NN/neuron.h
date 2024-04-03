@@ -16,8 +16,8 @@ class Neuron {
 private:
     std::vector<double> weights, m_weights, v_weights;
     std::vector<double> gradWeights;
-    double bias, m_bias, v_bias;
-    double gradBias;
+    double bias, m_bias{}, v_bias{};
+    double gradBias{};
     double lastInput, lastOutput;
 
 public:

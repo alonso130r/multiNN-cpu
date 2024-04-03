@@ -14,11 +14,11 @@
 class NeuralNetwork {
 private:
     std::vector<std::unique_ptr<Layer>> layers;
-    double lr;
+    double lr, beta1, beta2, epsilon, weightDecay;
     int lastSize = 0;
 
 public:
-    explicit NeuralNetwork(double LR);
+    explicit NeuralNetwork(double LR, double beta1 = 0.9, double beta2 = 0.999, double epsilon = 1e-8, double weightDecay = 0.01);
 
     // add hidden layer
     void addHiddenLayer(int numberOfNeurons, int inputSize);
