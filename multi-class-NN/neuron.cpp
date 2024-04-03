@@ -12,6 +12,9 @@ Neuron::Neuron(int inputSize, double biasValue) : bias(biasValue), lastInput(0.0
 
     for (int i = 0; i < inputSize; ++i) {
         weights.push_back(distribution(gen));
+        m_weights.push_back(0.0);
+        v_weights.push_back(0.0);
+        gradWeights.push_back(0.0);
     }
 
     std::cout << "Neuron created with " << weights.size() << " weights." << std::endl;

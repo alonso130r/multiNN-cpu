@@ -68,7 +68,7 @@ NeuralNetwork::train(const std::vector<std::vector<double>> &dataset, const std:
             // update weights w/ AdamW
             for (auto &layer : layers) {
                 for (auto &neuron : layer->getNeurons()) {
-                    neuron.updateAdamW(lr, beta1, beta2, epsilon, weightDecay, i);
+                    neuron.updateAdamW(lr, beta1, beta2, epsilon, weightDecay, (int) i);
                 }
             }
 

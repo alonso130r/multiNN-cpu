@@ -67,10 +67,12 @@ int main() {
 
     NeuralNetwork nn1(1e-2);
     nn1.addInputLayer((int)features[1].size(), (int)features[1].size());
-    nn1.addHiddenLayer(512, 1000); // 1000
+    nn1.addHiddenLayer(512, 1000);
     nn1.addHiddenLayer(256, 512);
     nn1.addHiddenLayer(128, 256);
-    nn1.addOutputLayer(1, 128);
+    nn1.addHiddenLayer(64, 128); // eval test
+    nn1.addHiddenLayer(32, 64); // eval test
+    nn1.addOutputLayer(1, 32);
 
     InputLayer::normalize(features);
 
