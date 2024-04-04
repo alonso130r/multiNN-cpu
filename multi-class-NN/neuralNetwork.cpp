@@ -12,11 +12,6 @@ void NeuralNetwork::addHiddenLayer(int numberOfNeurons, int inputSize) {
     layers.push_back(std::make_unique<HiddenLayer>(numberOfNeurons, lastSize));
 }
 
-void NeuralNetwork::addHiddenLayer(int numberOfNeurons) {
-    layers.push_back(std::make_unique<HiddenLayer>(numberOfNeurons, lastSize));
-    lastSize /= 2;
-}
-
 void NeuralNetwork::addInputLayer(int inputSize, int numberOfNeurons) {
     layers.insert(layers.begin(), std::make_unique<InputLayer>(numberOfNeurons, inputSize));
     lastSize = inputSize;
@@ -24,6 +19,11 @@ void NeuralNetwork::addInputLayer(int inputSize, int numberOfNeurons) {
 
 void NeuralNetwork::addOutputLayer(int numberOfNeurons, int inputSize) {
     layers.push_back(std::make_unique<OutputLayer>(numberOfNeurons, inputSize));
+    if (numberOfNeurons == 1) {
+        numberOfClasses = 2;
+    } else {
+        numberOfClasses = numberOfNeurons;
+    }
 }
 
 std::vector<double> NeuralNetwork::forward(const std::vector<double> &inputs) {
@@ -35,6 +35,25 @@ std::vector<double> NeuralNetwork::forward(const std::vector<double> &inputs) {
 }
 
 /* BACKPROP/TRAIN WORK BEGINS HERE */
+
+void NeuralNetwork::evaluate(const std::vector<std::vector<double>> &dataset,
+                             const std::vector<std::vector<double>> &labels) {
+    double loss = 0.0;
+    std::cout << "Evaluating..." << std::endl;
+    std::vector<std::vector<double>> totalOutputs;
+    for (size_t i = 0; i < dataset.size(); ++i) {
+        std::vector<double> outputs = forward(dataset[i]);
+        std::vector<double> probabilities = softmax(outputs);
+        totalOutputs.push_back(probabilities);
+
+        loss += crossEntropyLoss(probabilities, labels[i]);
+
+        if (i % 30 == 0) {
+            std::cout << "Iteration " << i << ", loss of: " <<  loss / (double)i << ", accuracy of: " << calculateAccuracy(totalOutputs, labels) << ", F1 score of: " << calculateF1Score(totalOutputs, labels) <<std::endl;
+        }
+
+    }
+}
 
 void NeuralNetwork::backpropagate(const std::vector<double> &expected) {
     std::vector<double> deltas;
@@ -56,9 +75,11 @@ NeuralNetwork::train(const std::vector<std::vector<double>> &dataset, const std:
     std::cout << "Training begun..." << std::endl;
     for (int epoch = 0; epoch < epochs; ++epoch) {
         double loss = 0.0;
+        std::vector<std::vector<double>> totalOutputs;
         for (size_t i = 0; i < dataset.size(); ++i) {
             std::vector<double> outputs = forward(dataset[i]);
             std::vector<double> probabilities = softmax(outputs);
+            totalOutputs.push_back(probabilities);
             backpropagate(labels[i]);
 
             // calculate loss using cross-entropy
@@ -72,13 +93,66 @@ NeuralNetwork::train(const std::vector<std::vector<double>> &dataset, const std:
             }
 
             if (i % 100 == 0) {
-                std::cout << "Iteration " << i << ", loss of: " <<  loss / (double)i << std::endl;
+                std::cout << "Iteration " << i << ", loss of: " <<  loss / (double)i << ", accuracy of: " << calculateAccuracy(totalOutputs, labels) << ", F1 score of: " << calculateF1Score(totalOutputs, labels) <<std::endl;
             }
         }
         loss /= (double)dataset.size();
         printf("Epoch %d / %d, Loss: %0.5f\n", epoch + 1, epochs, loss);
     }
     save(filename);
+}
+
+double NeuralNetwork::calculateF1Score(const std::vector<std::vector<double>> &predictions,
+                                       const std::vector<std::vector<double>> &labels) {
+    std::vector<int> TP(numberOfClasses, 0);
+    std::vector<int> FP(numberOfClasses, 0);
+    std::vector<int> FN(numberOfClasses, 0);
+
+    for (size_t i = 0; i < predictions.size(); ++i) {
+        int predictedClass = (int)std::distance(predictions[i].begin(), std::max_element(predictions[i].begin(), predictions[i].end()));
+        int actualClass = (int)std::distance(labels[i].begin(), std::max_element(labels[i].begin(), labels[i].end()));
+
+        if (predictedClass == actualClass) {
+            TP[actualClass]++;
+        } else {
+            FP[predictedClass]++;
+            FN[actualClass]++;
+        }
+    }
+
+    double precision = 0.0;
+    for (size_t i = 0; i < TP.size(); ++i) {
+        if (TP[i] + FP[i] > 0) {
+            precision += static_cast<double>(TP[i]) / (TP[i] + FP[i]);
+        }
+    }
+    precision /= (double)TP.size();
+
+    double recall = 0.0;
+    for (size_t i = 0; i < TP.size(); ++i) {
+        if (TP[i] + FN[i] > 0) {
+            recall += static_cast<double>(TP[i]) / (TP[i] + FN[i]);
+        }
+    }
+    recall /= (double)TP.size();
+    if (precision + recall == 0) {
+        return 0.0;
+    }
+    return 2 * (precision * recall) / (precision + recall);
+}
+
+double NeuralNetwork::calculateAccuracy(const std::vector<std::vector<double>> &predictions,
+                                        const std::vector<std::vector<double>> &labels) {
+    int correct = 0;
+    for (size_t i = 0; i < predictions.size(); ++i) {
+        size_t predIndex = std::distance(predictions[i].begin(), std::max_element(predictions[i].begin(), predictions[i].end()));
+        size_t labelIndex = std::distance(labels[i].begin(), std::max_element(labels[i].begin(), labels[i].end()));
+        if (predIndex == labelIndex) {
+            correct++;
+        }
+    }
+
+    return static_cast<double>(correct) / (double)predictions.size();
 }
 
 std::vector<double> NeuralNetwork::softmax(const std::vector<double> &inputs) {
@@ -110,6 +184,7 @@ double NeuralNetwork::crossEntropyLoss(const std::vector<double>& outputs, const
 
 void NeuralNetwork::save(const std::string &filename) {
     std::ofstream file(filename, std::ios::binary);
+    std::cout << "Saving weights to " << filename << "..." << std::endl;
     if (!file.is_open()) {
         std::cerr << "Failed to open file for writing: " << filename << std::endl;
         return;

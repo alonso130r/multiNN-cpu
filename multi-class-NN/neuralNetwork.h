@@ -16,6 +16,8 @@ private:
     std::vector<std::unique_ptr<Layer>> layers;
     double lr, beta1, beta2, epsilon, weightDecay;
     int lastSize = 0;
+    int numberOfClasses = 0;
+
 
 
 public:
@@ -23,7 +25,6 @@ public:
 
     // add hidden layer
     void addHiddenLayer(int numberOfNeurons, int inputSize);
-    void addHiddenLayer(int numberOfNeurons);
 
     // add input layer
     void addInputLayer(int numberOfNeurons, int inputSize);
@@ -37,8 +38,12 @@ public:
     // backprop/train methods
     std::vector<double> softmax(const std::vector<double> &inputs);
     double crossEntropyLoss(const std::vector<double>& outputs, const std::vector<double>& labels);
+    double calculateAccuracy(const std::vector<std::vector<double>>& predictions, const std::vector<std::vector<double>>& labels);
+    double calculateF1Score(const std::vector<std::vector<double>>& predictions, const std::vector<std::vector<double>>& labels);
+
     void backpropagate(const std::vector<double> &expected);
     void train(const std::vector<std::vector<double>>& dataset, const std::vector<std::vector<double>>& labels, int epochs, const std::string &filename);
+    void evaluate(const std::vector<std::vector<double>>& dataset, const std::vector<std::vector<double>>& labels);
 
     // save/load weights, binary file
     void save(const std::string &filename);

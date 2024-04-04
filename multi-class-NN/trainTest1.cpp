@@ -53,7 +53,32 @@ void loadCSV(const std::string &filename, std::vector<std::vector<double>> &feat
     }
 }
 
-int main() {
+void eval() {
+    std::vector<std::vector<double>> evalFeatures;
+    std::vector<std::vector<double>> evalLabels;
+    std::string f2 = "/Users/vijaygoyal/Documents/GitHub/gpt-cpp/multi-class-NN/dataset1/val_pre.csv";
+
+    loadCSV(f2, evalFeatures, evalLabels);
+
+    NeuralNetwork nn1(1e-2);
+    nn1.addInputLayer(1000, 1000);
+    nn1.addHiddenLayer(512, 1000);
+    nn1.addHiddenLayer(256, 512);
+    nn1.addHiddenLayer(128, 256);
+    nn1.addHiddenLayer(64, 128); // eval test
+    nn1.addHiddenLayer(32, 64); // eval test
+    nn1.addOutputLayer(1, 32);
+
+    InputLayer::normalize(evalFeatures);
+
+    std::string file = "/Users/vijaygoyal/Documents/GitHub/gpt-cpp/multi-class-NN/params2.bin";
+
+    nn1.load(file);
+
+    nn1.evaluate(evalFeatures, evalLabels);
+}
+
+void train() {
     std::vector<std::vector<double>> features;
     std::vector<std::vector<double>> labels;
 
@@ -61,22 +86,24 @@ int main() {
 
     loadCSV(f1, features, labels);
 
-    std::cout << features.size() << "\n";
-    std::cout << labels.size() << "\n";
-    std::cout << labels[1].size() << std::endl;
-
     NeuralNetwork nn1(1e-2);
-    nn1.addInputLayer((int)features[1].size(), (int)features[1].size());
+    nn1.addInputLayer(1000, 1000);
     nn1.addHiddenLayer(512, 1000);
     nn1.addHiddenLayer(256, 512);
     nn1.addHiddenLayer(128, 256);
     nn1.addHiddenLayer(64, 128); // eval test
     nn1.addHiddenLayer(32, 64); // eval test
-    //nn1.addHiddenLayer(16, 32); // eval test
     nn1.addOutputLayer(1, 32);
 
     InputLayer::normalize(features);
 
     std::string file = "/Users/vijaygoyal/Documents/GitHub/gpt-cpp/multi-class-NN/params2.bin";
+
+    nn1.load(file);
+
     nn1.train(features, labels, 1, file);
+}
+
+int main() {
+    eval();
 }
