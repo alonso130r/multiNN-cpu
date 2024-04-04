@@ -72,10 +72,11 @@ int main() {
     nn1.addHiddenLayer(128, 256);
     nn1.addHiddenLayer(64, 128); // eval test
     nn1.addHiddenLayer(32, 64); // eval test
+    //nn1.addHiddenLayer(16, 32); // eval test
     nn1.addOutputLayer(1, 32);
 
     InputLayer::normalize(features);
 
-    std::string file = "/Users/vijaygoyal/Documents/GitHub/gpt-cpp/multi-class-NN/params1.bin";
+    std::string file = "/Users/vijaygoyal/Documents/GitHub/gpt-cpp/multi-class-NN/params2.bin";
     nn1.train(features, labels, 1, file);
 }

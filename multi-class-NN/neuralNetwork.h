@@ -17,6 +17,7 @@ private:
     double lr, beta1, beta2, epsilon, weightDecay;
     int lastSize = 0;
 
+
 public:
     explicit NeuralNetwork(double LR, double beta1 = 0.9, double beta2 = 0.999, double epsilon = 1e-8, double weightDecay = 0.01);
 
@@ -34,6 +35,8 @@ public:
     std::vector<double> forward(const std::vector<double> &inputs);
 
     // backprop/train methods
+    std::vector<double> softmax(const std::vector<double> &inputs);
+    double crossEntropyLoss(const std::vector<double>& outputs, const std::vector<double>& labels);
     void backpropagate(const std::vector<double> &expected);
     void train(const std::vector<std::vector<double>>& dataset, const std::vector<std::vector<double>>& labels, int epochs, const std::string &filename);
 
